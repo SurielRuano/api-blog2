@@ -1,0 +1,36 @@
+<html>
+<head>
+	<title>
+		{%block titulo%}
+		Base template
+		{%endblock titulo%}
+	</title>
+	<style type="text/css">
+	.error{
+		background: red;
+		width: 100%;
+		color:white;
+	}
+	.success{
+		background: green;
+		width: 100%;
+		color: white;
+	}
+		{%block estilos%}
+		{%endblock estilos%}
+	</style>
+</head>
+<body>
+	{%if messages%}
+	{%for message in messages%}
+	<h5 class="{{message.tags}}">{{message}}</h5>
+	{%endfor%}
+	{%endif%}
+
+
+	<h1>Blog Genial</h1>
+
+{%block content%}
+{%endblock content%}
+</body>
+</html>

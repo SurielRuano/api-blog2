@@ -1,0 +1,14 @@
+{%extends 'base.html'%}
+
+{%block content%}
+<h2>Lista de posts</h2>
+{%for post in posts%}
+	<h2>{{post.titulo}}</h2>
+	<p>{{post.cuerpo}}</p>
+	<img src="/media/{{post.imagen}}">
+	<h4>{{post.autor}}</h4>
+{%empty%}
+	<h2>No hay posts aún, porque no creas uno?</h2>
+{%endfor%}
+
+{%endblock content%}
