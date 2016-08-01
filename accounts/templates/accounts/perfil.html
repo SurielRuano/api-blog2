@@ -1,9 +1,12 @@
 {%extends 'base.html'%}
-
+{%load static%}
 
 {%block content%}
 
 	<h1>Bienvenido a tu perfil {{request.user.username}}</h1>
+	<a href="{%url 'logout'%}">
+	<button>Cerrar tu sesión</button>
+	</a>
 
 	<input type="email" value="{{request.user.email}}">
 	<input type="text" value="{{request.user.first_name}}">

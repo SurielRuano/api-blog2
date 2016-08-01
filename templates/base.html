@@ -16,9 +16,18 @@
 		width: 100%;
 		color: white;
 	}
+	.enlinea li{
+		display: inline-block;
+		border: 1px solid black;
+		background: blue;
+		color:white;
+		padding: 5px;
+	}
 		{%block estilos%}
 		{%endblock estilos%}
 	</style>
+	{%block links%}
+	{%endblock links%}
 </head>
 <body>
 	{%if messages%}
@@ -27,8 +36,16 @@
 	{%endfor%}
 	{%endif%}
 
-
+<ul class="enlinea">
+	{%if request.user.is_authenticated%}
+	<a href="{%url 'profile'%}"><li>Tu perfil</li></a>
+	<a href="{%url 'logout'%}"><li>Cerrar sesión</li></a>
+	{%else%}
+	<a href="{%url 'login'%}"><li>Iniciar sesión</li></a>
+	{%endif%}
+</ul>
 	<h1>Blog Genial</h1>
+
 
 {%block content%}
 {%endblock content%}
