@@ -134,6 +134,11 @@ LOGIN_REDIRECT_URL = reverse_lazy('posts:lista')
 # LOGIN_URL = reverse_lazy('')
 # LOGOUT_URL = reverse_lazy('')
 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'accounts.authentication.EmailAuthBackend',
+    )
+
 
 
 
