@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'posts',
+    'social.apps.django_app.default',
 
 ]
 
@@ -137,7 +138,14 @@ LOGIN_REDIRECT_URL = reverse_lazy('posts:lista')
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'accounts.authentication.EmailAuthBackend',
+    'accounts.authentication.TelAuthBackend',
+    'social.backends.facebook.Facebook2OAuth2',
     )
+
+SOCIAL_AUTH_FACEBOOK_KEY = '272074543174237'
+SOCIAL_AUTH_FACEBOOK_SECRET = '226c17a7251de08bd28630faba95f3e8'
+
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 
 
 

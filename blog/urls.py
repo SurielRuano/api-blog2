@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^blog/',include(postUrls,namespace="posts")),
     url(r'^accounts/', include(accUrls)),
+    url('', include('social.apps.django_app.urls', namespace='social')),
     url(
         regex=r'^media/(?P<path>.*)$',
         view='django.views.static.serve',

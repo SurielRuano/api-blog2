@@ -3,6 +3,7 @@
 <head>
 	<title>Login</title>
 	<link rel="stylesheet" type="text/css" href="{%static 'css/skeleton.css'%}">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 	<style type="text/css">
 		.login-form{
 			text-align: center;
@@ -28,6 +29,7 @@
 	<input type="hidden" name="next" value="{{next}}"> 
 	<input type="submit" value="Iniciar Sesión">
 </form>
+<p>Si quieres puedes entrar con tu cuenta de Facebook <a href="{%url 'social:begin' 'facebook'%}" class="button"><i class="fa fa-facebook-square" aria-hidden="true"></i>Facebook</a></p>
 <p>Si aún no tienes sesión puedes crearla <a href="{%url 'registro'%}">aquí</a></p>
 
 </div>
