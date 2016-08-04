@@ -3,7 +3,9 @@
 {%block content%}
 <h2>Lista de posts</h2>
 {%for post in posts%}
+	<a href="{{post.get_absolute_url}}">
 	<h2>{{post.titulo}}</h2>
+	</a>
 	<p>{{post.cuerpo}}</p>
 	<img src="/media/{{post.imagen}}">
 	<h4>{{post.autor}}</h4>

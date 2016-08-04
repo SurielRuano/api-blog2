@@ -2,7 +2,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import View
 from .models import Post
-from .forms import PostForm
+from .forms import PostForm, CommentForm
 from django.contrib import messages
 from django.utils.text import slugify
 
@@ -24,7 +24,11 @@ class DetailView(View):
 		template_name = 'posts/detalle.html'
 		# post = Post.objects.get(slug=slug)
 		post = get_object_or_404(Post,slug=slug)
-		context = {'post':post}
+		comment_form = CommentForm()
+		context = {
+		'post':post,
+		'comment_form':comment_form,
+		}
 		return render(request,template_name,context)
 
 class FormView(View):

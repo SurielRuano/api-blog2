@@ -19,3 +19,21 @@ class Post(models.Model):
 
 	def __str__(self):
 		return self.titulo
+
+class Comment(models.Model):
+	autor = models.ForeignKey(User, related_name='comentarios')
+	post = models.ForeignKey(Post, related_name='comentarios')
+	fecha = models.DateTimeField(auto_now=True)
+	cuerpo = models.TextField(max_length=140)
+
+	def __str__(self):
+		return '{} comento en {}'.format(self.autor,self.post)
+
+	class Meta:
+		ordering = ('-fecha',)	
+
+
+
+
+
+
