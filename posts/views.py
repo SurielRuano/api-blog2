@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 from django.views.generic import View
 from .models import Post
 from .forms import PostForm, CommentForm
@@ -8,6 +8,9 @@ from django.utils.text import slugify
 
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+
+from django.core.urlresolvers import reverse
+
 
 
 
@@ -25,11 +28,21 @@ class DetailView(View):
 		# post = Post.objects.get(slug=slug)
 		post = get_object_or_404(Post,slug=slug)
 		comment_form = CommentForm()
+		comentarios = post.comentarios.all()
 		context = {
 		'post':post,
 		'comment_form':comment_form,
+		'comentarios':comentarios
 		}
 		return render(request,template_name,context)
+	def post(self,request,slug):
+		form = CommentForm(request.POST)
+		post = Post.objects.get(slug=slug)
+		com = form.save(commit=False)
+		com.autor = request.user
+		com.post = post
+		com.save()
+		return redirect('posts:detalle',slug=slug)
 
 class FormView(View):
 	@method_decorator(login_required)

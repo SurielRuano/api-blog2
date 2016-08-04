@@ -28,7 +28,15 @@
 	<form action="." method="post">
 		{%csrf_token%}
 		{{comment_form.as_p}}
+		<input type="hidden" name="post" value="{{post.id}}">
 		<input class="boton" type="submit" value="Comentar">
 	</form>
+	<ul>
+	{%for comentario in comentarios%}
+	<li>
+		<span>{{comentario.autor}}=></span>{{comentario.cuerpo}}
+	</li>
+	{%endfor%}
+</ul>
 
 {%endblock content%}
