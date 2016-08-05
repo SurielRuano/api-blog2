@@ -12,6 +12,7 @@ from django.utils.decorators import method_decorator
 from django.core.urlresolvers import reverse
 from taggit.models import Tag
 
+from django.db.models import Count
 
 
 
@@ -36,11 +37,14 @@ class DetailView(View):
 		post = get_object_or_404(Post,slug=slug)
 		comment_form = CommentForm()
 		comentarios = post.comentarios.all()
-
+		post_tags_id = post.tags.values_list('id', flat=True)
+		posts_similares = Post.objects.filter(tags__in=post_tags_id).exclude(id=post.id)
+		posts_similares = posts_similares.annotate(same_tags=Count('tags'))
 		context = {
 		'post':post,
 		'comment_form':comment_form,
-		'comentarios':comentarios
+		'comentarios':comentarios,
+		'posts_similares':posts_similares
 
 		}
 		return render(request,template_name,context)
@@ -68,6 +72,8 @@ class FormView(View):
 			nuevo_post.slug = slugify(nuevo_post.titulo)
 			nuevo_post.autor = request.user
 			nuevo_post.save()
+			#la docu de taggit pide esto:
+			form.save_m2m()
 			messages.success(request,'Tu post se ha guardado con éxito! ')
 			return redirect('posts:lista')
 		else:
