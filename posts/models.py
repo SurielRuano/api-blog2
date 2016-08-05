@@ -4,8 +4,14 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 
+from taggit.managers import TaggableManager
+
 
 class Post(models.Model):
+	"""
+	este modelo usa tag
+	"""
+	tags = TaggableManager()
 	titulo = models.CharField(max_length=140)
 	cuerpo = models.TextField()
 	fecha = models.DateTimeField(auto_now=True)

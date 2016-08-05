@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'posts',
     'social.apps.django_app.default',
+    'taggit',
 
 ]
 
@@ -146,6 +147,7 @@ SOCIAL_AUTH_FACEBOOK_KEY = '272074543174237'
 SOCIAL_AUTH_FACEBOOK_SECRET = '226c17a7251de08bd28630faba95f3e8'
 
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+
 
 
 

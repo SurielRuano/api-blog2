@@ -10,16 +10,23 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
 from django.core.urlresolvers import reverse
-
+from taggit.models import Tag
 
 
 
 
 class ListView(View):
-	def get(self, request):
+	def get(self, request, tag_slug=None):
 		template_name = 'posts/lista.html'
 		posts = Post.objects.all()
-		context = {'posts':posts}
+		tag=None
+		if tag_slug:
+			tag = get_object_or_404(Tag, slug=tag_slug)
+			posts = posts.filter(tags__in=[tag])
+		context = {
+		'posts':posts,
+		'tag':tag,
+		}
 		return render(request,template_name,context)
 
 class DetailView(View):
@@ -29,10 +36,12 @@ class DetailView(View):
 		post = get_object_or_404(Post,slug=slug)
 		comment_form = CommentForm()
 		comentarios = post.comentarios.all()
+
 		context = {
 		'post':post,
 		'comment_form':comment_form,
 		'comentarios':comentarios
+
 		}
 		return render(request,template_name,context)
 	def post(self,request,slug):
