@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 from django.views.generic import View
-from .models import Post
+from .models import Post, Categoria
 from .forms import PostForm, CommentForm
 from django.contrib import messages
 from django.utils.text import slugify
@@ -56,6 +56,23 @@ class DetailView(View):
 		com.post = post
 		com.save()
 		return redirect('posts:detalle',slug=slug)
+
+class Ejercicio(View):
+	def get(self,request,categoria=None):
+		if categoria:
+			cat = Categoria.objects.get(nombre=categoria)
+			posts = cat.post.all()
+		else:
+			posts = Post.objects.all()
+		template_name = 'posts/lista.html'
+		context = {
+		'posts':posts,
+		'tag':categoria
+		}
+		return render(request,template_name,context)
+
+
+
 
 class FormView(View):
 	@method_decorator(login_required)

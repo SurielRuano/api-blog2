@@ -38,6 +38,12 @@ class Comment(models.Model):
 	class Meta:
 		ordering = ('-fecha',)	
 
+class Categoria(models.Model):
+	nombre = models.CharField(max_length=140)
+	post = models.ManyToManyField(Post) 
+
+	def __str__(self):
+		return self.nombre
 
 
 
