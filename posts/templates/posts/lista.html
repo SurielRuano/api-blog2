@@ -1,7 +1,10 @@
 {%extends 'base.html'%}
+{%load post_tags%}
 
 {%block content%}
 <h2>Lista de posts</h2>
+<h2>Lista de posts, post totales {%total_post %} </h2>
+<h3>numero de usuarios {% user_number%}</h3>
 {%if tag%}
 	<h2>Filtrados con el tag: {{tag}}</h2>
 {%endif%}

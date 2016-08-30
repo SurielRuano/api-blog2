@@ -1,0 +1,10 @@
+<!-- estructura html para template_tags -->
+
+<ul>
+	{%for post in ultimos%}
+	<li>
+		<a href="{{post.get_absolute_url}}"></a>
+			{{post.titulo}}
+	</li>
+	{%endfor%}
+</ul>
